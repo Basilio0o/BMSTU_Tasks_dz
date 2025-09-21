@@ -1,6 +1,5 @@
 #include <iostream>
 #include <math.h>
-#include <algorithm>
 using namespace std;
 int orient(double a[2], double b[2], double c[2])
 {
@@ -37,27 +36,40 @@ bool intersect(double arr1[2], double arr2[2], double arr3[2][2])
 
 int main()
 {
-    int n = 0, c = 0;
+    int n = 0, m = 0, c = 0;
     double x = 0, y = 0;
     cout << "n = ";
     cin >> n;
     cout << "Enter coordinates\n";
-    double arr[n][2];
+    double arr1[n][2];
     for (int i = 0; i < n; i++){
-        cin >> arr[i][0] >> arr[i][1];
+        cin >> arr1[i][0] >> arr1[i][1];
     }
-    cout << "Enter point's coordinates ";
-    cin >> x >> y;
-    double arr_p[2][2] = {{x,y}, {x + 1e9, y + 1e-6}};
-    for (int i = 0; i < n-1; i++){
-        if (intersect(arr[i], arr[i+1], arr_p)) c++;
+    cout << "m = ";
+    cin >> m;
+    cout << "Enter coordinates\n";
+    double arr2[m][2];
+    for (int i = 0; i < m; i++){
+        cin >> arr2[i][0] >> arr2[i][1];
     }
-    if (intersect(arr[0], arr[n-1], arr_p)) c++;
-    if (c % 2 == 0){
-        cout << "Outside";
+    
+    for(int j = 0; j < n-1; j++){
+        double arr_p[2][2] = {{arr1[j][0], arr1[j][1]}, {arr1[j+1][0], arr1[j+1][1]}};
+        for (int i = 0; i < m-1; i++){
+        if (intersect(arr2[i], arr2[i+1], arr_p)) c++;
+        }
+        if (intersect(arr2[0], arr2[m-1], arr_p)) c++;
+    }
+    double arr_p[2][2] = {{arr1[0][0], arr1[0][1]}, {arr1[n-1][0], arr1[n-1][1]}};
+        for (int i = 0; i < m-1; i++){
+        if (intersect(arr2[i], arr2[i+1], arr_p)) c++;
+        }
+        if (intersect(arr2[0], arr2[m-1], arr_p)) c++;
+    if (c == 0){
+        cout << "Don't intersect";
     }
     else{
-        cout << "Inside";
+        cout << "Intersect";
     }
     return 0;
 }
