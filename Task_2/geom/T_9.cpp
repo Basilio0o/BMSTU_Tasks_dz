@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 using namespace std;
+
 int orient(double a[2], double b[2], double c[2])
 {
     double n = (a[0] - b[0])*(c[1] - b[1]) - (a[1] - b[1])*(c[0] - b[0]);

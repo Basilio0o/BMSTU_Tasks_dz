@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 using namespace std;
+
 int main()
 {
     double x1, y1, x2, y2;
