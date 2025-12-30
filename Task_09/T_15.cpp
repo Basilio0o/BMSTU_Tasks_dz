@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void BubbleSort(vector<int> arr, int n)
+void BubbleSort(vector<int>& arr, int n)
 {
     for(int i = 0; i < n - 1; i++){
         for(int j = 0; j < n - 1 - i; j++){
@@ -19,7 +19,7 @@ void BubbleSort(vector<int> arr, int n)
     }
 }
 
-void SelectionSort(vector<int> arr, int n)
+void SelectionSort(vector<int>& arr, int n)
 {
 	int temp = 0, max = arr[0], max_index = 0, last = 0;
 	for (int i = 0; i < n; i++)
@@ -41,7 +41,7 @@ void SelectionSort(vector<int> arr, int n)
 	}
 }
 
-void InsertionSort(vector<int> arr, int n)
+void InsertionSort(vector<int>& arr, int n)
 {
     int sorted = 0;
     int temp = 0;
@@ -56,7 +56,7 @@ void InsertionSort(vector<int> arr, int n)
     }
 }
 
-void ShellSort(vector<int> arr, int n)
+void ShellSort(vector<int>& arr, int n)
 {
 	int temp = 0;
     for (int gap = n / 2; gap > 0; gap /= 2){
@@ -72,7 +72,7 @@ void ShellSort(vector<int> arr, int n)
     }
 }
 
-void PartOfQuickSort(vector<int> arr, int left, int right)
+void PartOfQuickSort(vector<int>& arr, int left, int right)
 {
     int l = left, r = right;
     int temp = 0;
@@ -92,11 +92,11 @@ void PartOfQuickSort(vector<int> arr, int left, int right)
     if (l < right) PartOfQuickSort(arr, l, right);
 }
 
-void QuickSort(vector<int> arr, int n){
-    PartOfQuickSort(arr, 0, n);
+void QuickSort(vector<int>& arr, int n){
+    PartOfQuickSort(arr, 0, n - 1);
 }
 
-void Merge(vector<int> arr, int l, int m, int r)
+void Merge(vector<int>& arr, int l, int m, int r)
 {
 	int n1 = m - l + 1;
 	int n2 = r - m;
@@ -129,7 +129,7 @@ void Merge(vector<int> arr, int l, int m, int r)
 
 }
 
-void PartOfMergeSort(vector<int> arr, int l, int r)
+void PartOfMergeSort(vector<int>& arr, int l, int r)
 {
 	if(l < r)
 	{
@@ -142,12 +142,12 @@ void PartOfMergeSort(vector<int> arr, int l, int r)
 	}
 }
 
-void MergeSort(vector<int> arr, int n)
+void MergeSort(vector<int>& arr, int n)
 {
-	PartOfMergeSort(arr, 0, n);
+	PartOfMergeSort(arr, 0, n - 1);
 }
 
-void heapify(vector<int> arr, int n, int i)
+void heapify(vector<int>& arr, int n, int i)
 {
     int largest = i;
     int left = 2 * i + 1;
@@ -171,7 +171,7 @@ void heapify(vector<int> arr, int n, int i)
     }
 }
 
-void HeapSort(vector<int> arr, int n)
+void HeapSort(vector<int>& arr, int n)
 {
     for (int i = n / 2 - 1; i >= 0; i--) {
         heapify(arr, n, i);
@@ -190,12 +190,12 @@ void HeapSort(vector<int> arr, int n)
 
 int main()
 {
-    int n = 10000;
+    int n = 100000;
     using namespace std::chrono;
     vector<int> arr(n);
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> dist(-200, 200);
+    uniform_int_distribution<int> dist(-2000, 2000);
     for(int i = 0; i < n; i++) arr[i] = dist(gen);
     vector<int> temp = arr;
 
@@ -248,12 +248,13 @@ int main()
 	cout << "HeapSort отсортировала массив за: " << duration.count() << " мс\n";
 	temp = arr;
 
-	start = high_resolution_clock::now();
+    start = high_resolution_clock::now();
 	sort(temp.begin(), temp.end());
 	end = high_resolution_clock::now();
 	duration = duration_cast<milliseconds>(end - start);
-	cout << "sort отсортировала массив за: " << duration.count() << " мс\n";
+	cout << "Sort отсортировала массив за: " << duration.count() << " мс\n";
 	temp = arr;
 
     return 0;
 }
+
